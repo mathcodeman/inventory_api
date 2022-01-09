@@ -1,7 +1,7 @@
 import express from "express";
 import * as inventory from './db_model.mjs'
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json())

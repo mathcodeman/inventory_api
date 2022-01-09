@@ -2,7 +2,7 @@ POST http://localhost:3000/inventory_item HTTP/1.1
 content-type: application/json
 
 {
-    "id":39072858,
+    "id":39072859,
     "sku": "Y6789BLACK",
     "requires_shipping": true,
     "cost": "135.00",
