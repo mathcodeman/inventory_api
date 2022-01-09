@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 mongoose.connect(
-    process.env.MONGOURI || 'mongodb://localhost:27017/inventory',
+    'mongodb+srv://admin:admin@inventorydb.bvw96.mongodb.net/test' || 'mongodb://localhost:27017/inventory',
     { useNewUrlParser: true }
 );
 
