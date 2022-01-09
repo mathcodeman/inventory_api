@@ -1,0 +1,74 @@
+POST http://localhost:3000/inventory_item HTTP/1.1
+content-type: application/json
+
+{
+    "id":39072858,
+    "sku": "Y6789BLACK",
+    "requires_shipping": true,
+    "cost": "135.00",
+    "tracked": true
+}
+
+#####
+GET http://localhost:3000/inventory_item?ids=39072857_39072856
+
+####
+GET http://localhost:3000/inventory_item/39072855
+
+####
+GET http://localhost:3000/inventory_item/retrieve
+
+####
+PUT http://localhost:3000/inventory_item/39072857 HTTP/1.1
+content-type: application/json
+
+{
+    "sku": "IPODUU7759",
+    "requires_shipping": false,
+    "tracked": false
+}
+
+####
+DELETE http://localhost:3000/inventory_item/39072857 HTTP/1.1
+
+####
+DELETE http://localhost:3000/inventory_item/?ids=39072857_39072855 HTTP/1.1
+
+
+#####
+POST http://localhost:3000/inventory_levels/connect HTTP/1.1
+content-type: application/json
+
+{
+    "inventory_item_id":100001,
+    "location_id": 100001
+}
+
+#####
+POST http://localhost:3000/inventory_levels/adjust HTTP/1.1
+content-type: application/json
+
+{
+    "inventory_item_id":34567890,
+    "location_id": 655441492,
+    "available_adjustment":-5
+}
+
+#####
+POST http://localhost:3000/inventory_levels/set HTTP/1.1
+content-type: application/json
+
+{
+    "inventory_item_id":34567890,
+    "location_id": 655441492,
+    "available":43
+}
+
+####
+GET http://localhost:3000/inventory_levels/retrieve/ HTTP/1.1
+
+####
+GET http://localhost:3000/inventory_levels/?inventory_item_ids=100001_100000&location_ids=100000_100001 HTTP/1.1
+
+####
+DELETE http://localhost:3000/inventory_levels/?inventory_item_id=34567856&location_id=655441490 HTTP/1.1
