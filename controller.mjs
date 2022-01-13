@@ -1,7 +1,7 @@
 import express from "express";
 import * as inventory from './db_model.mjs'
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 3000
 const app = express();
 
 app.use(express.json())
@@ -28,7 +28,7 @@ app.get('/inventory_item/retrieve', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json(result)
+            res.status(500).json({ Error: "Request Failed!" })
         })
 })
 
@@ -89,7 +89,7 @@ app.post('/inventory_levels/connect', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json(result)
+            res.status(500).json({ Error: "Request Failed!" })
         })
 })
 
@@ -99,7 +99,7 @@ app.post('/inventory_levels/set', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json(result)
+            res.status(500).json({ Error: "Request Failed!" })
         })
 })
 
@@ -109,7 +109,7 @@ app.post('/inventory_levels/adjust', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json(result)
+            res.status(500).json({ Error: "Request Failed!" })
         })
 })
 
@@ -119,7 +119,7 @@ app.get('/inventory_levels', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json(result)
+            res.status(500).json({ Error: "Request Failed!" })
         })
 })
 
@@ -129,7 +129,7 @@ app.get('/inventory_levels/retrieve', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json(result)
+            res.status(500).json({ Error: "Request Failed!" })
         })
 })
 
@@ -139,7 +139,20 @@ app.delete('/inventory_levels', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json(result)
+            res.status(500).json({ Error: "Request Failed!" })
+        })
+})
+
+//Location
+app.post('/location', (req, res) => {
+    inventory.creatLocation(req.body.location_id, req.body.location_name, req.body.address1,
+        req.body.city, req.body.zip, req.body.province, req.body.country, req.body.address2,
+        req.body.phone, req.body.province_code, req.body.country_code, req.body.country_name)
+        .then(result => {
+            res.status(201).json(result)
+        })
+        .catch(error => {
+            res.status(500).json({ Error: "Request Failed!" })
         })
 })
 

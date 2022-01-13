@@ -90,8 +90,12 @@ const inventoryLevelModelSchema = mongoose.Schema({
 const inventoryLevel = mongoose.model("inventoryLevel", inventoryLevelModelSchema)
 
 const connectInventoryLevel = async (inventory_item_id, location_id) => {
-    const file = new inventoryLevel({ inventory_item_id: inventory_item_id, location_id: location_id, available: 0, updated_at: currentTime })
-    return file.save()
+    const isLocationExist = await searchLocation(location_id)
+    if (isLocationExist) {
+        const file = new inventoryLevel({ inventory_item_id: inventory_item_id, location_id: location_id, available: 0, updated_at: currentTime })
+        return file.save()
+    }
+    return "Location does not exist"
 }
 
 const setInventoryLevel = async (inventory_item_id, location_id, available) => {
@@ -132,7 +136,43 @@ const deleteInventoryLevel = async (inventory_item_id, location_id) => {
     return file
 }
 
+const locationModelSchema = mongoose.Schema({
+    id: { type: Number, required: true },
+    name: { type: String, required: true },
+    address1: { type: String, required: true },
+    address2: { type: String, required: false },
+    city: { type: String, required: true },
+    zip: { type: String, required: true },
+    province: { type: String, required: true },
+    country: { type: String, required: true },
+    phone: { type: String, required: false },
+    created_at: { type: String, required: false },
+    updated_at: { type: String, required: false },
+    country_code: { type: String, required: false },
+    country_name: { type: String, required: false },
+    province_code: { type: String, required: false },
+    active: { type: Boolean, required: true }
+})
+
+const location = mongoose.model("location", locationModelSchema)
+
+const creatLocation = async (id, name, address1, city, zip, province, country, address2 = null, phone = null, province_code = null, country_code = null, country_name = null) => {
+    const file = new location({
+        id: id, name: name, address1: address1, city: city, zip: zip, province: province, country: country,
+        created_at: currentTime, active: true, address2: address2, phone: phone, updated_at: null,
+        province_code: province_code, country_code: country_code, country_name: country_name
+    })
+    return file.save()
+}
+
+const searchLocation = async (id) => {
+    const result = await location.findOne({ id: id })
+    const isLocationExist = result !== null
+    return isLocationExist
+}
+
 export {
     createInventoryItem, getInventoryItem, getInventoryItems, retrieveInventoryItem, editInventoryItem, deleteInventoryItem, deleteInventoryItems,
-    connectInventoryLevel, setInventoryLevel, adjustInventoryLevel, retrieveInventoryLevels, retrieveInventoryLevel, deleteInventoryLevel
+    connectInventoryLevel, setInventoryLevel, adjustInventoryLevel, retrieveInventoryLevels, retrieveInventoryLevel, deleteInventoryLevel,
+    creatLocation, searchLocation
 }

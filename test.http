@@ -41,7 +41,7 @@ content-type: application/json
 
 {
     "inventory_item_id":100001,
-    "location_id": 100001
+    "location_id": 655441490
 }
 
 #####
@@ -60,7 +60,7 @@ content-type: application/json
 
 {
     "inventory_item_id":34567890,
-    "location_id": 655441492,
+    "location_id": 655441491,
     "available":43
 }
 
@@ -72,3 +72,18 @@ GET http://localhost:3000/inventory_levels/?inventory_item_ids=100001_100000&loc
 
 ####
 DELETE http://localhost:3000/inventory_levels/?inventory_item_id=34567856&location_id=655441490 HTTP/1.1
+
+
+####
+POST http://localhost:3000/location HTTP/1.1
+content-type: application/json
+
+{
+    "location_id":655441491,
+    "location_name": "50 Rideau Street",
+    "address1":"50 Rideau Street",
+    "city":"Ottawa",
+    "zip":"K1N 9J7",
+    "province":"Ontario",
+    "country":"CA"
+}
