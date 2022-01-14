@@ -51,8 +51,8 @@ POST http://localhost:3000/inventory_levels/adjust HTTP/1.1
 content-type: application/json
 
 {
-    "inventory_item_id":34567890,
-    "location_id": 655441492,
+    "inventory_item_id":39072859,
+    "location_id": 655441491,
     "available_adjustment":-5
 }
 
@@ -61,7 +61,7 @@ POST http://localhost:3000/inventory_levels/set HTTP/1.1
 content-type: application/json
 
 {
-    "inventory_item_id":34567890,
+    "inventory_item_id":39072859,
     "location_id": 655441491,
     "available":43
 }
@@ -70,10 +70,10 @@ content-type: application/json
 GET http://localhost:3000/inventory_levels/retrieve/ HTTP/1.1
 
 ####
-GET http://localhost:3000/inventory_levels/?inventory_item_ids=100001_100000&location_ids=100000_100001 HTTP/1.1
+GET http://localhost:3000/inventory_levels/?inventory_item_ids=39072859&location_ids=655441491 HTTP/1.1
 
 ####
-DELETE http://localhost:3000/inventory_levels/?inventory_item_id=34567856&location_id=655441490 HTTP/1.1
+DELETE http://localhost:3000/inventory_levels/?inventory_item_id=39072859&location_id=655441491 HTTP/1.1
 
 
 ####

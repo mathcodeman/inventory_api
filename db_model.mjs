@@ -134,12 +134,18 @@ const connectInventoryLevel = async (inventory_item_id, location_id) => {
 
 const setInventoryLevel = async (inventory_item_id, location_id, available) => {
     const file = await inventoryLevel.findOneAndUpdate({ inventory_item_id: inventory_item_id, location_id: location_id }, { available: available, updated_at: currentTime })
+    if (file == null) {
+        return Promise.reject('No updated, item id or location id incorrect!!')
+    }
     const updateFile = await inventoryLevel.findOne({ inventory_item_id: inventory_item_id, location_id: location_id })
     return updateFile
 }
 
 const adjustInventoryLevel = async (inventory_item_id, location_id, available_adjustment) => {
     const file = await inventoryLevel.findOne({ inventory_item_id: inventory_item_id, location_id: location_id })
+    if (file == null) {
+        return Promise.reject('No adjustment, item id or location id incorrect!!')
+    }
     const currentAvailable = file['available']
     const updatedAvailable = currentAvailable + available_adjustment
     const uewFile = await inventoryLevel.findOneAndUpdate({ inventory_item_id: inventory_item_id, location_id: location_id }, { available: updatedAvailable, updated_at: currentTime })
