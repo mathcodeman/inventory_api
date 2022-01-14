@@ -18,7 +18,7 @@ app.post('/inventory_item', (req, res) => {
         })
         .catch(error => {
             console.log(error)
-            res.status(500).json({ Error: error })
+            res.status(404).json({ Error: error })
         })
 })
 
@@ -28,7 +28,7 @@ app.get('/inventory_item/retrieve', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -38,7 +38,7 @@ app.get('/inventory_item/:id', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -48,7 +48,7 @@ app.get('/inventory_item', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -58,7 +58,7 @@ app.put('/inventory_item/:id', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -68,7 +68,7 @@ app.delete('/inventory_item/:id', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -78,7 +78,7 @@ app.delete('/inventory_item', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -89,7 +89,7 @@ app.post('/inventory_levels/connect', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: error })
+            res.status(404).json({ Error: error })
         })
 })
 
@@ -99,7 +99,7 @@ app.post('/inventory_levels/set', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -109,7 +109,7 @@ app.post('/inventory_levels/adjust', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -119,7 +119,7 @@ app.get('/inventory_levels', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -129,7 +129,7 @@ app.get('/inventory_levels/retrieve', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -139,7 +139,7 @@ app.delete('/inventory_levels', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: "Request Failed!" })
         })
 })
 
@@ -152,7 +152,7 @@ app.post('/location', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: error })
         })
 })
 

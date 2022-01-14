@@ -191,12 +191,16 @@ const locationModelSchema = mongoose.Schema({
 const location = mongoose.model("location", locationModelSchema)
 
 const creatLocation = async (id, name, address1, city, zip, province, country, address2 = null, phone = null, province_code = null, country_code = null, country_name = null) => {
-    const file = new location({
-        id: id, name: name, address1: address1, city: city, zip: zip, province: province, country: country,
-        created_at: currentTime, active: true, address2: address2, phone: phone, updated_at: null,
-        province_code: province_code, country_code: country_code, country_name: country_name
-    })
-    return file.save()
+    const isLocationExist = await searchLocation(id)
+    if (!isLocationExist) {
+        const file = new location({
+            id: id, name: name, address1: address1, city: city, zip: zip, province: province, country: country,
+            created_at: currentTime, active: true, address2: address2, phone: phone, updated_at: null,
+            province_code: province_code, country_code: country_code, country_name: country_name
+        })
+        return file.save()
+    }
+    return Promise.reject('Location already existed!')
 }
 
 const searchLocation = async (id) => {
