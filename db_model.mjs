@@ -115,7 +115,8 @@ const inventoryLevel = mongoose.model("inventoryLevel", inventoryLevelModelSchem
 const connectInventoryLevel = async (inventory_item_id, location_id) => {
     const isLocationExist = await searchLocation(location_id)
     const isItemExist = await searchInventory(inventory_item_id)
-    if (isLocationExist && isItemExist) {
+    const isInventoryLevelExist = await searchInventoryLevel(inventory_item_id, location_id)
+    if (isLocationExist && isItemExist && !isInventoryLevelExist) {
         const file = new inventoryLevel({ inventory_item_id: inventory_item_id, location_id: location_id, available: 0, updated_at: currentTime })
         return file.save()
     }
@@ -127,6 +128,9 @@ const connectInventoryLevel = async (inventory_item_id, location_id) => {
     }
     else if (!isItemExist) {
         return Promise.reject('Inventory item does not exist!!')
+    }
+    else {
+        return Promise.reject('Inventory level already exist!!')
     }
 
 
@@ -174,6 +178,12 @@ const retrieveInventoryLevel = async () => {
 const deleteInventoryLevel = async (inventory_item_id, location_id) => {
     const file = await inventoryLevel.deleteOne({ inventory_item_id: inventory_item_id, location_id: location_id })
     return file
+}
+
+const searchInventoryLevel = async (inventory_item_id, location_id) => {
+    const file = await inventoryLevel.findOne({ inventory_item_id: inventory_item_id, location_id: location_id })
+    const isInventoryLevelExist = file !== null
+    return isInventoryLevelExist
 }
 
 const locationModelSchema = mongoose.Schema({
