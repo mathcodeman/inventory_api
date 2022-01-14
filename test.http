@@ -12,7 +12,7 @@ content-type: application/json
 }
 
 #####
-GET http://localhost:3000/inventory_item?ids=39072857_39072856
+GET http://localhost:3000/inventory_item?ids=390_39
 
 ####
 GET http://localhost:3000/inventory_item/39072855
@@ -21,7 +21,7 @@ GET http://localhost:3000/inventory_item/39072855
 GET http://localhost:3000/inventory_item/retrieve
 
 ####
-PUT http://localhost:3000/inventory_item/39072857 HTTP/1.1
+PUT http://localhost:3000/inventory_item/39072859 HTTP/1.1
 content-type: application/json
 
 {
@@ -31,10 +31,10 @@ content-type: application/json
 }
 
 ####
-DELETE http://localhost:3000/inventory_item/39072857 HTTP/1.1
+DELETE http://localhost:3000/inventory_item/39072858 HTTP/1.1
 
 ####
-DELETE http://localhost:3000/inventory_item/?ids=39072857_39072855 HTTP/1.1
+DELETE http://localhost:3000/inventory_item/?ids=39072857_39072859 HTTP/1.1
 
 
 #####
@@ -43,7 +43,7 @@ content-type: application/json
 
 {
     "inventory_item_id":39072859,
-    "location_id": 655441454
+    "location_id": 655441491
 }
 
 #####

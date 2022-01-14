@@ -46,6 +46,9 @@ const retrieveInventoryItem = async () => {
 
 const getInventoryItem = async (id) => {
     const file = await inventoryItem.findOne({ id: id })
+    if (file === null) {
+        return "No such item exist!!"
+    }
     return file
 }
 
@@ -54,7 +57,13 @@ const getInventoryItems = async (ids) => {
     const id_list = ids.split('_')
     for (let id of id_list) {
         const file = await inventoryItem.findOne({ id: id })
-        items.push(file)
+        if (file === null) {
+            items.push(`Item ${id} is not exist!!`)
+        }
+        else {
+            items.push(file)
+        }
+
     };
     return items
 }
@@ -67,6 +76,8 @@ const editInventoryItem = async (id, sku, requires_shipping, cost, country_code_
     });
     const file = await inventoryItem.findOne({ id: id })
     return file
+
+
 }
 
 const deleteInventoryItem = async (id) => {
@@ -79,9 +90,11 @@ const deleteInventoryItems = async (ids) => {
     const id_list = ids.split('_')
     for (let id of id_list) {
         const file = await inventoryItem.deleteOne({ id: id })
-        deleteCount++;
+        if (file.deletedCount === 1) {
+            deleteCount++;
+        }
     }
-    return deleteCount;
+    return { 'deleteCount': deleteCount };
 }
 
 const searchInventory = async (id) => {
@@ -106,7 +119,17 @@ const connectInventoryLevel = async (inventory_item_id, location_id) => {
         const file = new inventoryLevel({ inventory_item_id: inventory_item_id, location_id: location_id, available: 0, updated_at: currentTime })
         return file.save()
     }
-    return Promise.reject('Location or inventory item does not exist!!')
+    else if (!isLocationExist && !isItemExist) {
+        return Promise.reject('Location and inventory item does not exist!!')
+    }
+    else if (!isLocationExist) {
+        return Promise.reject('Location does not exist!!')
+    }
+    else if (!isItemExist) {
+        return Promise.reject('Inventory item does not exist!!')
+    }
+
+
 }
 
 const setInventoryLevel = async (inventory_item_id, location_id, available) => {
