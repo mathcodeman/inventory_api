@@ -47,7 +47,7 @@ const retrieveInventoryItem = async () => {
 const getInventoryItem = async (id) => {
     const file = await inventoryItem.findOne({ id: id })
     if (file === null) {
-        return "No such item exist!!"
+        return Promise.reject("No such item exist!!")
     }
     return file
 }
