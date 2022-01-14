@@ -168,7 +168,13 @@ const retrieveInventoryLevels = async (inventory_item_ids, location_ids) => {
     for (let inventory_item_id of inventory_item_ids_list) {
         for (let location_id of location_ids_list) {
             const file = await inventoryLevel.findOne({ inventory_item_id: inventory_item_id, location_id: location_id })
-            inventory_levels.push(file)
+            if (file === null) {
+                inventory_levels.push(`Inventory Item Id: ${inventory_item_id} or Location Id: ${location_id} does not exist!`)
+            }
+            else {
+                inventory_levels.push(file)
+            }
+
         }
     }
     return inventory_levels
