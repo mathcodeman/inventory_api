@@ -27,11 +27,16 @@ const inventoryItemModelSchema = mongoose.Schema({
 const inventoryItem = mongoose.model("inventoryItem", inventoryItemModelSchema)
 
 const createInventoryItem = async (id, sku, requires_shipping = null, cost = null, country_code_of_origin = null, province_code_of_origin = null, tracked = null) => {
-    const file = new inventoryItem({
-        id: id, sku: sku, created_at: currentTime, updated_at: null, requires_shipping: requires_shipping, cost: cost,
-        country_code_of_origin: country_code_of_origin, province_code_of_origin: province_code_of_origin, tracked: tracked
-    })
-    return file.save()
+    const isItemExist = await searchInventory(id)
+    if (!isItemExist) {
+        const file = new inventoryItem({
+            id: id, sku: sku, created_at: currentTime, updated_at: null, requires_shipping: requires_shipping, cost: cost,
+            country_code_of_origin: country_code_of_origin, province_code_of_origin: province_code_of_origin, tracked: tracked
+        })
+        return file.save()
+    }
+    return Promise.reject('Item already existed!')
+
 }
 
 const retrieveInventoryItem = async () => {
@@ -79,6 +84,11 @@ const deleteInventoryItems = async (ids) => {
     return deleteCount;
 }
 
+const searchInventory = async (id) => {
+    const result = await inventoryItem.findOne({ id: id })
+    const isItemExist = result !== null
+    return isItemExist
+}
 
 const inventoryLevelModelSchema = mongoose.Schema({
     inventory_item_id: { type: Number, required: true },
@@ -91,11 +101,12 @@ const inventoryLevel = mongoose.model("inventoryLevel", inventoryLevelModelSchem
 
 const connectInventoryLevel = async (inventory_item_id, location_id) => {
     const isLocationExist = await searchLocation(location_id)
-    if (isLocationExist) {
+    const isItemExist = await searchInventory(inventory_item_id)
+    if (isLocationExist && isItemExist) {
         const file = new inventoryLevel({ inventory_item_id: inventory_item_id, location_id: location_id, available: 0, updated_at: currentTime })
         return file.save()
     }
-    return "Location does not exist"
+    return Promise.reject('Location or inventory item does not exist!!')
 }
 
 const setInventoryLevel = async (inventory_item_id, location_id, available) => {

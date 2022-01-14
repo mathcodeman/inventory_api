@@ -6,7 +6,9 @@ content-type: application/json
     "sku": "Y6789BLACK",
     "requires_shipping": true,
     "cost": "135.00",
-    "tracked": true
+    "tracked": true,
+    "country_code_of_origin": "FR",
+    "province_code_of_origin": "QC"
 }
 
 #####
@@ -40,8 +42,8 @@ POST http://localhost:3000/inventory_levels/connect HTTP/1.1
 content-type: application/json
 
 {
-    "inventory_item_id":100001,
-    "location_id": 655441490
+    "inventory_item_id":39072859,
+    "location_id": 655441454
 }
 
 #####

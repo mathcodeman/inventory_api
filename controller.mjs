@@ -18,7 +18,7 @@ app.post('/inventory_item', (req, res) => {
         })
         .catch(error => {
             console.log(error)
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(500).json({ Error: error })
         })
 })
 
@@ -89,7 +89,7 @@ app.post('/inventory_levels/connect', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(500).json({ Error: "Request Failed!" })
+            res.status(500).json({ Error: error })
         })
 })
 
