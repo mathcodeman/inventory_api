@@ -21,7 +21,7 @@ GET http://localhost:3000/inventory_item/39072855
 GET http://localhost:3000/inventory_item/retrieve
 
 ####
-PUT http://localhost:3000/inventory_item/39072859 HTTP/1.1
+PUT http://localhost:3000/inventory_item/390728545 HTTP/1.1
 content-type: application/json
 
 {

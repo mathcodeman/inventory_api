@@ -70,6 +70,10 @@ const getInventoryItems = async (ids) => {
 
 
 const editInventoryItem = async (id, sku, requires_shipping, cost, country_code_of_origin, province_code_of_origin, tracked) => {
+    const isItemExist = await searchInventory(id)
+    if (!isItemExist) {
+        return Promise.reject('Item does not existed!')
+    }
     const updateFile = await inventoryItem.updateOne({ id: id }, {
         sku: sku, updated_at: currentTime, requires_shipping: requires_shipping, cost: cost,
         country_code_of_origin: country_code_of_origin, province_code_of_origin: province_code_of_origin, tracked: tracked

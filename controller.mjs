@@ -58,7 +58,7 @@ app.put('/inventory_item/:id', (req, res) => {
             res.status(201).json(result)
         })
         .catch(error => {
-            res.status(404).json({ Error: "Request Failed!" })
+            res.status(404).json({ Error: error })
         })
 })
 
