@@ -203,6 +203,11 @@ const creatLocation = async (id, name, address1, city, zip, province, country, a
     return Promise.reject('Location already existed!')
 }
 
+const retrieveLocation = async () => {
+    const file = await location.find()
+    return file
+}
+
 const searchLocation = async (id) => {
     const result = await location.findOne({ id: id })
     const isLocationExist = result !== null
@@ -212,5 +217,5 @@ const searchLocation = async (id) => {
 export {
     createInventoryItem, getInventoryItem, getInventoryItems, retrieveInventoryItem, editInventoryItem, deleteInventoryItem, deleteInventoryItems,
     connectInventoryLevel, setInventoryLevel, adjustInventoryLevel, retrieveInventoryLevels, retrieveInventoryLevel, deleteInventoryLevel,
-    creatLocation, searchLocation
+    creatLocation, retrieveLocation
 }

@@ -156,6 +156,16 @@ app.post('/location', (req, res) => {
         })
 })
 
+app.get('/location/retrieve', (req, res) => {
+    inventory.retrieveLocation()
+        .then(result => {
+            res.status(201).json(result)
+        })
+        .catch(error => {
+            res.status(404).json({ Error: "Request Failed!" })
+        })
+})
+
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}...`);
 });

@@ -89,3 +89,6 @@ content-type: application/json
     "province":"Ontario",
     "country":"CA"
 }
+
+####
+GET http://localhost:3000/location/retrieve HTTP/1.1
